@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body style="margin:0;padding:0;background:#eef2f1;font-family:Arial, sans-serif;">
+
+<table width="100%" cellpadding="0" cellspacing="0" style="padding:28px 10px;">
+    <tr>
+        <td align="center">
+
+            <!-- CONTAINER -->
+            <table width="100%" cellpadding="0" cellspacing="0"
+                   style="max-width:620px;background:#ffffff;border-radius:12px;overflow:hidden;border:1px solid #e5e7eb;">
+
+                <!-- BRAND HEADER -->
+                <tr>
+                    <td style="background:#14532d;padding:18px;text-align:center;color:white;">
+                        <h2 style="margin:0;font-size:20px;">🚗 CarScrapy</h2>
+                        <p style="margin:4px 0 0;font-size:12px;opacity:0.85;">
+                            Appointment Request
+                        </p>
+                    </td>
+                </tr>
+
+                <!-- INFO STRIP -->
+                <tr>
+                    <td style="background:#fef9c3;color:#92400e;text-align:center;padding:10px;font-size:13px;font-weight:600;">
+                        ⏳ Your request is under review
+                    </td>
+                </tr>
+
+                <!-- TITLE -->
+                <tr>
+                    <td style="padding:22px 26px 10px 26px;text-align:center;">
+                        <h1 style="margin:0;font-size:22px;color:#111827;">
+                            📩 Request Received
+                        </h1>
+                        <p style="margin-top:8px;font-size:14px;color:#6b7280;">
+                            We’ve received your appointment request
+                        </p>
+                    </td>
+                </tr>
+
+                <!-- BODY -->
+                <tr>
+                    <td style="padding:10px 26px 26px;">
+
+                        <p style="color:#374151;font-size:14px;">
+                            Hi <strong th:text="${username}">User</strong> 👋,
+                        </p>
+
+                        <p style="color:#374151;font-size:14px;">
+                            Thank you for choosing <strong>CarScrapy</strong>. Your appointment request has been successfully submitted and is currently being reviewed by our team.
+                        </p>
+
+                        <!-- BOOKING ID -->
+                        <div style="text-align:center;margin:22px 0;">
+                            <span style="font-size:13px;color:#6b7280;">Request ID</span><br>
+                            <strong style="font-size:18px;color:#111827;">
+                                #<span th:text="${bookingId}">12345</span>
+                            </strong>
+                        </div>
+
+                        <!-- DETAILS BOX -->
+                        <div style="background:#f9fafb;padding:18px;border-radius:10px;">
+
+                            <p style="margin:6px 0;"><strong>Vehicle:</strong> <span th:text="${vehicleName}"></span></p>
+                            <p style="margin:6px 0;"><strong>Type:</strong> <span th:text="${vehicleType}"></span></p>
+                            <p style="margin:6px 0;"><strong>Fuel:</strong> <span th:text="${fuelType}"></span></p>
+
+                            <hr style="border:none;border-top:1px solid #e5e7eb;margin:12px 0;">
+
+                            <p style="margin:6px 0;"><strong>Preferred Date:</strong> <span th:text="${appointmentDate}"></span></p>
+                            <p style="margin:6px 0;"><strong>Status:</strong>
+                                <span style="color:#ca8a04;font-weight:600;" th:text="${status}"></span>
+                            </p>
+
+                            <p style="margin-top:10px;font-size:15px;color:#16a34a;font-weight:bold;">
+                                Estimated Price: ₹<span th:text="${estimatePrice}"></span>
+                            </p>
+
+                        </div>
+
+                        <!-- NEXT STEPS -->
+                        <div style="margin-top:20px;padding:14px;background:#fffbeb;border-radius:10px;">
+                            <p style="margin:0;font-size:13px;color:#92400e;">
+                                ⏳ <strong>What happens next?</strong>
+                            </p>
+                            <ul style="margin:8px 0 0 18px;color:#92400e;font-size:12px;">
+                                <li>Our team will review your request</li>
+                                <li>You will receive a confirmation email once approved</li>
+                                <li>We may contact you for additional details</li>
+                            </ul>
+                        </div>
+
+                        <!-- SUPPORT -->
+                        <p style="font-size:13px;color:#6b7280;margin-top:18px;">
+                            Have questions? Our support team is here to help anytime.
+                        </p>
+
+                    </td>
+                </tr>
+
+                <!-- FOOTER -->
+                <tr>
+                    <td style="background:#f1f5f3;padding:18px;text-align:center;border-top:1px solid #e5e7eb;">
+
+                        <p style="margin:0;font-size:12px;color:#6b7280;">
+                            © 2026 CarScrapy. All rights reserved.
+                        </p>
+
+                        <p style="margin:6px 0 0;font-size:11px;color:#9ca3af;">
+                            contact@carscrapy.com
+                        </p>
+
+                        <p style="margin:6px 0 0;font-size:11px;color:#9ca3af;">
+                            This is an automated email. Please do not reply.
+                        </p>
+
+                    </td>
+                </tr>
+
+            </table>
+
+        </td>
+    </tr>
+</table>
+
+</body>
+</html>
+
+
+
+
+

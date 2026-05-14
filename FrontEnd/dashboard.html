@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CarScrapy Dashboard</title>
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+    <aside class="sidebar">
+        <div class="brand">
+            <div class="brand-mark">C</div>
+            <div>
+                <div class="logo">Car<span>Scrapy</span></div>
+                <p>Recycle. Inspect. Book.</p>
+            </div>
+        </div>
+
+        <nav class="nav-list" aria-label="Dashboard navigation">
+            <button class="nav-item active" onclick="goToPrice()"><span>Rs</span> Get Price</button>
+            <button class="nav-item" onclick="openYardSearchModal()"><span>YD</span> Scrap Yards</button>
+            <button class="nav-item" onclick="openAppointmentModal()"><span>OK</span> Book Appointment</button>
+            <button class="nav-item" onclick="openRequestModal()"><span>RQ</span> My Requests</button>
+            <button class="nav-item" onclick="openMyAppointmentModal()"><span>AP</span> My Appointments</button>
+        </nav>
+
+        <div class="sidebar-note">
+            <strong>Smart scrap pickup</strong>
+            <small>Compare yards and book inspection from one clean workspace.</small>
+        </div>
+    </aside>
+
+    <main class="main-container">
+        <header class="topbar">
+            <div>
+                <p class="eyebrow">Customer workspace</p>
+                <h1>Scrap your car the simple way</h1>
+            </div>
+            <div class="user-pill">
+                <span class="avatar"></span>
+                <span id="username">User</span>
+            </div>
+        </header>
+
+        <section class="hero-panel">
+            <div class="hero-copy">
+                <span class="hero-kicker">Certified car recycling</span>
+                <h2>Estimate value, pick a yard, and schedule your appointment.</h2>
+                <p>Designed for fast vehicle scrap requests with nearby yard discovery and booking updates in one dashboard.</p>
+                <div class="hero-actions">
+                    <button class="btn-success" onclick="goToPrice()">Get Scrap Value</button>
+                    <button class="btn-soft" onclick="openYardSearchModal()">Find Scrap Yard</button>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <img src="scrap-yard-hero.png" alt="Clean car scrap yard with inspection area">
+                <div class="hero-badge">
+                    <strong>Live booking</strong>
+                    <small>Inspection slots ready</small>
+                </div>
+            </div>
+        </section>
+
+        <section class="stats" aria-label="Dashboard stats">
+            <article class="stat-card">
+                <span class="stat-icon">OK</span>
+                <span class="stat-label">Appointments</span>
+                <strong id="statAppointments" data-count="0">--</strong>
+                <small>Scheduled bookings</small>
+            </article>
+
+            <article class="stat-card">
+                <span class="stat-icon">Rs</span>
+                <span class="stat-label">Requests</span>
+                <strong id="statRequests" data-count="0">--</strong>
+                <small>Price requests</small>
+            </article>
+
+            <article class="stat-card accent-card">
+                <span class="stat-icon">YD</span>
+                <span class="stat-label">Yard Search</span>
+                <strong>Fast</strong>
+                <small>Filter by city, state, or pincode</small>
+            </article>
+        </section>
+
+        <section class="workbench">
+            <div class="section-heading">
+                <div>
+                    <p class="eyebrow">Quick actions</p>
+                    <h2>Manage scrap requests</h2>
+                </div>
+            </div>
+
+            <div class="dashboard-grid">
+                <button class="dashboard-card" onclick="goToPrice()">
+                    <span class="card-media card-media-price"></span>
+                    <span class="card-icon">Rs</span>
+                    <strong>Get Price</strong>
+                    <small>Estimate your vehicle scrap value before booking.</small>
+                </button>
+
+                <button class="dashboard-card" onclick="openYardSearchModal()">
+                    <span class="card-media card-media-yard"></span>
+                    <span class="card-icon">YD</span>
+                    <strong>Scrap Yards</strong>
+                    <small>Browse clean, organized yards by location.</small>
+                </button>
+
+                <button class="dashboard-card" onclick="openAppointmentModal()">
+                    <span class="card-media card-media-booking"></span>
+                    <span class="card-icon">OK</span>
+                    <strong>Book Appointment</strong>
+                    <small>Schedule inspection and pickup at a selected yard.</small>
+                </button>
+
+                <button class="dashboard-card" onclick="openRequestModal()">
+                    <span class="card-media card-media-request"></span>
+                    <span class="card-icon">RQ</span>
+                    <strong>My Requests</strong>
+                    <small>Review submitted cars and price estimates.</small>
+                </button>
+
+                <button class="dashboard-card" onclick="openMyAppointmentModal()">
+                    <span class="card-media card-media-appointment"></span>
+                    <span class="card-icon">AP</span>
+                    <strong>My Appointments</strong>
+                    <small>Track status, postpone, or cancel bookings.</small>
+                </button>
+            </div>
+        </section>
+
+        <section class="selected-yard-box">
+            <p>Selected Yard</p>
+            <div id="selectedYardDisplay">Not selected</div>
+        </section>
+    </main>
+
+    <div id="carModal" class="modal">
+        <div class="modal-content">
+            <button class="close-icon" onclick="closeCarModal()" aria-label="Close">x</button>
+            <div class="modal-title">
+                <span>Rs</span>
+                <div>
+                    <h3>Get Scrap Price</h3>
+                    <p>Enter vehicle details to calculate the estimated scrap value.</p>
+                </div>
+            </div>
+
+            <input id="carName" class="form-control" placeholder="Car Name">
+            <input id="carYear" class="form-control" type="number" placeholder="Year">
+
+            <select id="vehicleType" class="form-control">
+                <option value="HATCHBACK">Hatchback</option>
+                <option value="SEDAN">Sedan</option>
+                <option value="SUV">SUV</option>
+            </select>
+
+            <select id="fuelType" class="form-control">
+                <option value="PETROL">Petrol</option>
+                <option value="DIESEL">Diesel</option>
+                <option value="CNG">CNG</option>
+            </select>
+
+            <select id="carCity" class="form-control">
+                <option value="MUMBAI">Mumbai</option>
+                <option value="DELHI">Delhi</option>
+                <option value="BANGALORE">Bangalore</option>
+                <option value="CHENNAI">CHENNAI</option>
+                <option value="HYDRERABAD">HYDRERABAD</option>
+                <option value="KOLKATA">KOLKATA</option>
+                <option value="PUNE">PUNE</option>
+    
+            </select>
+
+            <button class="btn-success" onclick="getCarPrice()">Get Price</button>
+            <div id="carResult" class="result-box"></div>
+        </div>
+    </div>
+
+    <div id="requestModal" class="modal">
+        <div class="modal-content modal-large">
+            <button class="close-icon" onclick="closeRequestModal()" aria-label="Close">x</button>
+            <div class="modal-title">
+                <span>RQ</span>
+                <div>
+                    <h3>My Requests</h3>
+                    <p>Your recent vehicle valuation requests.</p>
+                </div>
+            </div>
+            <div id="requestList" class="stack-list"></div>
+        </div>
+    </div>
+
+    <div id="yardSearchModal" class="modal">
+        <div class="modal-content modal-large">
+            <button class="close-icon" onclick="closeYardSearchModal()" aria-label="Close">x</button>
+            <div class="modal-title">
+                <span>YD</span>
+                <div>
+                    <h3>Scrap Yards</h3>
+                    <p>Search nearby recycling yards and choose one for booking.</p>
+                </div>
+            </div>
+            <div class="filters">
+                <input id="yardName" class="form-control" placeholder="Search by name">
+                <input id="yardCity" class="form-control" placeholder="City">
+                <input id="yardState" class="form-control" placeholder="State">
+                <input id="yardPincode" class="form-control" placeholder="Pincode">
+            </div>
+            <button class="search-btn" onclick="searchYards()">Search</button>
+            <div id="yardResults" class="yard-results"></div>
+        </div>
+    </div>
+
+    <div id="appointmentModal" class="modal">
+        <div class="modal-content booking-modal">
+            <button class="close-icon" onclick="closeAppointmentModal()" aria-label="Close">x</button>
+            <div class="modal-title">
+                <span>OK</span>
+                <div>
+                    <h3>Book Appointment</h3>
+                    <p>Confirm request, yard, date, and contact number.</p>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Request</label>
+                <select id="appointmentRequest" class="form-control"></select>
+            </div>
+
+            <div class="form-group">
+                <label>Scrap Yard</label>
+                <select id="appointmentYard" class="form-control"></select>
+            </div>
+
+            <button class="find-yard-btn" onclick="openYardSearchModal()">Find Nearby Yard</button>
+
+            <div class="form-group">
+                <label>Date</label>
+                <input type="date" id="appointmentDate" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label>Mobile Number</label>
+                <input type="text" id="appointmentMobile" class="form-control" placeholder="Enter mobile number">
+            </div>
+
+            <button id="bookBtn" class="btn-success" onclick="bookAppointment()">Book Appointment</button>
+        </div>
+    </div>
+
+    <div id="myAppointmentModal" class="modal">
+        <div class="modal-content modal-large">
+            <button class="close-icon" onclick="closeMyAppointmentModal()" aria-label="Close">x</button>
+            <div class="modal-title">
+                <span>AP</span>
+                <div>
+                    <h3>My Appointments</h3>
+                    <p>Track all bookings and appointment changes.</p>
+                </div>
+            </div>
+            <div id="appointmentList" class="stack-list"></div>
+        </div>
+    </div>
+
+    <div id="appointmentDetailModal" class="modal">
+        <div class="modal-content">
+            <button class="close-icon" onclick="closeAppointmentDetailModal()" aria-label="Close">x</button>
+            <h3>Appointment Details</h3>
+            <div id="appointmentDetails" class="details-panel"></div>
+            <div class="modal-actions">
+                <button class="btn-danger" onclick="openCancelModal()">Cancel Appointment</button>
+                <button class="btn-success" onclick="openPostponeModal()">Postpone Appointment</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="cancelModal" class="modal">
+        <div class="modal-content">
+            <button class="close-icon" onclick="closeCancelModal()" aria-label="Close">x</button>
+            <h3>Cancel Appointment</h3>
+            <input id="cancelReason" placeholder="Enter reason" class="form-control">
+            <button class="btn-danger" onclick="confirmCancel()">Confirm Cancel</button>
+        </div>
+    </div>
+
+    <div id="postponeModal" class="modal">
+        <div class="modal-content">
+            <button class="close-icon" onclick="closePostponeModal()" aria-label="Close">x</button>
+            <h3>Postpone Appointment</h3>
+            <input type="date" id="postponeDate" class="form-control">
+            <button class="btn-success" onclick="confirmPostpone()">Confirm Postpone</button>
+        </div>
+    </div>
+
+    <div id="bookingSuccess" class="success-popup">Appointment Booked Successfully!</div>
+    <div id="toastContainer"></div>
+
+    <script src="dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CarScrapy Admin</title>
+    <link rel="stylesheet" href="staff.css">
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+    <div class="logo">Car<span>Scrapy</span></div>
+
+    <div class="nav-item" data-module="dashboard">🏠 Dashboard</div>
+    <div class="nav-item" data-module="manageYard">🏭 Manage Yard</div>
+        <div class="nav-item" data-module="appointments">📅 Appointments</div>
+
+</div>
+
+<div id="toastContainer"></div>
+
+<div class="topbar">
+    <h2 id="pageTitle">Dashboard</h2>
+
+    <div class="top-actions">
+        <button id="yardToggleBtn" onclick="toggleYardStatusQuick()">
+            Loading...
+        </button>
+
+        <div class="user">staff</div>
+    </div>
+</div>
+
+<!-- MAIN -->
+<div class="main-container">
+   
+    <div class="content"></div>
+</div>
+
+
+
+
+
+<div id="statusEditModal" class="modal">
+  <div class="modal-content">
+    <h3>Change Status</h3>
+
+    <select id="statusSelect" class="input">
+        <option value="ACTIVE">ACTIVE</option>
+        <option value="INACTIVE">INACTIVE</option>
+        <option value="UNDERMAINTENANCE">UNDERMAINTENANCE</option>
+    </select>
+
+    <button onclick="updateStatusOnly()">Update</button>
+  </div>
+</div>
+
+
+
+<script src="staff-dashbaord.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,161 @@
+/* ===== ROOT THEME (MATCH DASHBOARD) ===== */
+:root {
+  --primary: #18b979;
+  --secondary: #37a8d8;
+  --dark: #0f1b2d;
+  --text: #102033;
+  --muted: #64748b;
+  --line: #dbe7ea;
+}
+
+/* ===== BODY BACKGROUND ===== */
+.auth-page {
+  background:
+    linear-gradient(
+      rgba(15,27,45,0.82),
+      rgba(15,27,45,0.82)
+    ),
+    url("scrap-yard-bg.jpg");
+
+  background-size: cover;
+  background-position: center;
+}
+
+/* ===== CARD ===== */
+.register-card {
+  width: 360px;
+
+ background: linear-gradient(
+    180deg,
+    rgba(255,255,255,0.9),
+    rgba(240, 249, 250, 0.85)
+  );
+  backdrop-filter: blur(10px);
+
+  border-radius: 18px;
+  border: none;
+
+    box-shadow:
+    0 25px 60px rgba(0,0,0,0.25),
+    0 0 0 1px rgba(255,255,255,0.1);
+
+  transition: all 0.25s ease;
+}
+
+.register-card:hover {
+  transform: translateY(-4px);
+}
+
+/* ===== BRAND ===== */
+.brand-title {
+  font-weight: 900;
+  font-size: 28px;
+  letter-spacing: -0.5px;
+
+}
+
+
+.brand-title span {
+  color: #18b979;
+}
+
+.subtitle {
+    color: #6b7280;
+  font-size: 13px;
+    margin-bottom: 18px;
+
+}
+
+label {
+  font-weight: 600;
+  color: #1f2937;
+}
+
+/* ===== INPUTS ===== */
+.form-control {
+  border-radius: 12px;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  font-size: 14px;
+  background: rgba(255,255,255,0.85);
+  border: 1px solid rgba(0,0,0,0.08);
+}
+
+.form-control:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px rgba(24,185,121,0.2);
+}
+
+/* ===== BUTTON ===== */
+.register-btn {
+ background: linear-gradient(135deg, #18b979, #37a8d8);
+  box-shadow: 0 8px 20px rgba(24,185,121,0.25);
+  font-weight: 700;
+  border-radius: 12px;
+  padding: 12px;
+
+  transition: all 0.2s ease;
+}
+
+.register-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(24,185,121,0.3);
+}
+.register-btn:active {
+  transform: scale(0.97);
+}
+
+/* ===== LINKS ===== */
+.login-link {
+  color: var(--primary);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.login-link:hover {
+  text-decoration: underline;
+}
+
+/* ===== MESSAGE ===== */
+#message {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* ===== SMALL UX POLISH ===== */
+* {
+  transition: all 0.2s ease;
+}
+
+#message {
+  padding: 10px;
+  border-radius: 10px;
+  margin-top: 10px;
+}
+
+.success {
+  background: #e6f9f0;
+  color: #18b979;
+}
+
+.error {
+  background: #fde8e8;
+  color: #e11d48;
+}
+
+.spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid white;
+  border-top: 2px solid transparent;
+  border-radius: 50%;
+  display: inline-block;
+  margin-left: 8px;
+  animation: spin 0.6s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

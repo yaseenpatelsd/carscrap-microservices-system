@@ -1,0 +1,414 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
+
+:root {
+    --sidebar: #102033;
+    --sidebar-soft: #1b2d42;
+    --sidebar-border: rgba(255, 255, 255, 0.1);
+    --text: #122033;
+    --muted: #607189;
+    --teal: #19b99a;
+    --teal-dark: #0f987f;
+    --cyan: #36b7d8;
+    --orange: #f5a623;
+    --red: #ef4444;
+    --green: #16a34a;
+    --card: rgba(255, 255, 255, 0.84);
+    --line: #d6e2ea;
+    --shadow: 0 22px 55px rgba(18, 32, 51, 0.12);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    background:
+        radial-gradient(circle at 80% 6%, rgba(52, 183, 216, 0.18), transparent 28%),
+        linear-gradient(135deg, #f8fbfc 0%, #edf5f8 55%, #f9fbfb 100%);
+    color: var(--text);
+    font-family: "Inter", Arial, sans-serif;
+    letter-spacing: 0;
+}
+
+.sidebar {
+    position: fixed;
+    inset: 0 auto 0 0;
+    z-index: 20;
+    width: 264px;
+    padding: 28px 18px;
+    background: linear-gradient(180deg, #102536 0%, #101f31 52%, #0e1a2b 100%);
+    color: #fff;
+    box-shadow: 16px 0 45px rgba(18, 32, 51, 0.16);
+}
+
+.logo {
+    position: relative;
+    margin: 0 0 28px 50px;
+    color: #ffffff;
+    font-size: 24px;
+    font-weight: 800;
+    line-height: 1.05;
+}
+
+.logo::before {
+    content: "S";
+    position: absolute;
+    left: -50px;
+    top: -2px;
+    display: grid;
+    width: 44px;
+    height: 44px;
+    place-items: center;
+    border-radius: 14px;
+    background: linear-gradient(135deg, #20c997, #35b7d8);
+    color: #fff;
+    font-size: 20px;
+    font-weight: 800;
+}
+
+.logo::after {
+    content: "Staff workspace";
+    display: block;
+    margin-top: 8px;
+    color: #b9c8d7;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.logo span {
+    color: var(--teal);
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    min-height: 58px;
+    margin: 10px 0;
+    padding: 0 18px;
+    border: 1px solid var(--sidebar-border);
+    border-radius: 14px;
+    background: var(--sidebar-soft);
+    color: #dce7f2;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 750;
+    transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+}
+
+.nav-item:hover,
+.nav-item.active {
+    border-color: rgba(25, 185, 154, 0.65);
+    background: #153f48;
+    color: #fff;
+    transform: translateX(3px);
+}
+
+.topbar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 264px;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 118px;
+    padding: 30px 40px 18px;
+    background: linear-gradient(90deg, rgba(248, 251, 252, 0.92), rgba(239, 248, 250, 0.88));
+    backdrop-filter: blur(10px);
+}
+
+.topbar h2 {
+    margin: 0;
+    color: var(--text);
+    font-size: 50px;
+    font-weight: 800;
+    line-height: 1;
+}
+
+.topbar h2::before {
+    content: "STAFF MANAGEMENT";
+    display: block;
+    margin-bottom: 11px;
+    color: #007a61;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+}
+
+.top-actions {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+button {
+    min-height: 42px;
+    padding: 10px 18px;
+    border: 0;
+    border-radius: 12px;
+    background: linear-gradient(135deg, var(--teal), #34aee0);
+    color: #fff;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 800;
+    box-shadow: 0 16px 35px rgba(25, 185, 154, 0.22);
+    transition: transform 0.16s ease, box-shadow 0.16s ease, opacity 0.16s ease;
+}
+
+button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 18px 38px rgba(25, 185, 154, 0.28);
+}
+
+button:disabled {
+    cursor: not-allowed;
+    opacity: 0.62;
+    transform: none;
+}
+
+#yardToggleBtn {
+    min-width: 132px;
+}
+
+.user {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 46px;
+    padding: 10px 18px 10px 12px;
+    border: 1px solid #ffffff;
+    border-radius: 24px;
+    background: rgba(255, 255, 255, 0.82);
+    color: #000;
+    font-weight: 800;
+    box-shadow: 0 16px 35px rgba(18, 32, 51, 0.08);
+}
+
+.user::before {
+    content: "";
+    display: block;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--teal), #35b7d8);
+}
+
+.main-container {
+    min-height: 100vh;
+    margin-left: 264px;
+    padding: 148px 40px 50px;
+}
+
+.content {
+    width: min(1235px, 100%);
+}
+
+.card {
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 28px 24px;
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    background: var(--card);
+    box-shadow: var(--shadow);
+}
+
+.card h2 {
+    margin: 0 0 20px;
+    color: var(--text);
+    font-size: 28px;
+    font-weight: 800;
+}
+
+.input,
+select,
+input {
+    width: min(260px, 100%);
+    min-height: 42px;
+    margin: 6px 8px 10px 0;
+    padding: 10px 12px;
+    border: 1px solid #cbd9e2;
+    border-radius: 10px;
+    outline: none;
+    background: #fff;
+    color: var(--text);
+    font: inherit;
+    font-size: 14px;
+}
+
+.input:focus,
+select:focus,
+input:focus {
+    border-color: var(--teal);
+    box-shadow: 0 0 0 4px rgba(25, 185, 154, 0.12);
+}
+
+#appointmentList {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+    margin-top: 18px;
+}
+
+.staff-card {
+    padding: 20px;
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--teal);
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 14px 35px rgba(18, 32, 51, 0.08);
+}
+
+.staff-card p {
+    margin: 8px 0;
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.45;
+}
+
+.staff-card b {
+    color: var(--text);
+}
+
+.staff-card button {
+    width: auto;
+    min-height: 38px;
+    margin: 4px 6px 4px 0;
+    padding: 9px 13px;
+    border-radius: 9px;
+    font-size: 13px;
+}
+
+.modal {
+    position: fixed;
+    inset: 0;
+    z-index: 40;
+    display: none;
+    padding: 22px;
+    background: rgba(12, 24, 38, 0.48);
+    backdrop-filter: blur(5px);
+}
+
+.modal-content {
+    width: min(420px, 100%);
+    margin: 13vh auto 0;
+    padding: 26px;
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    background: #fff;
+    box-shadow: 0 30px 80px rgba(12, 24, 38, 0.28);
+}
+
+.modal-content h3 {
+    margin: 0 0 18px;
+    font-size: 24px;
+    font-weight: 800;
+}
+
+.modal-content .input {
+    width: 100%;
+    margin-right: 0;
+}
+
+#toastContainer {
+    position: fixed;
+    top: 22px;
+    right: 22px;
+    z-index: 100;
+    display: grid;
+    gap: 10px;
+}
+
+.toast {
+    min-width: 230px;
+    padding: 13px 16px;
+    border-radius: 12px;
+    background: #102033;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 700;
+    box-shadow: 0 18px 45px rgba(18, 32, 51, 0.22);
+    animation: toastIn 0.22s ease both;
+}
+
+.toast.success {
+    background: var(--green);
+}
+
+.toast.error {
+    background: var(--red);
+}
+
+.toast.info {
+    background: #2563eb;
+}
+
+@keyframes toastIn {
+    from {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@media (max-width: 900px) {
+    .sidebar {
+        position: static;
+        width: 100%;
+        min-height: auto;
+        padding: 18px;
+    }
+
+    .logo {
+        margin-bottom: 20px;
+    }
+
+    .topbar {
+        position: static;
+        height: auto;
+        padding: 24px 18px;
+    }
+
+    .topbar h2 {
+        font-size: 38px;
+    }
+
+    .main-container {
+        margin-left: 0;
+        padding: 24px 18px 38px;
+    }
+}
+
+@media (max-width: 640px) {
+    .topbar,
+    .top-actions {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .topbar h2 {
+        font-size: 34px;
+    }
+
+    .card {
+        padding: 22px 18px;
+    }
+
+    #appointmentList {
+        grid-template-columns: 1fr;
+    }
+
+    .input,
+    select,
+    input,
+    button {
+        width: 100%;
+    }
+}

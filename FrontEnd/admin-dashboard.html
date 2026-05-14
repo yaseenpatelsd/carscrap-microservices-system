@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CarScrapy Admin</title>
+    <link rel="stylesheet" href="admin-dashboard.css">
+</head>
+
+<body>
+    <aside class="sidebar">
+        <div class="brand">
+            <div class="brand-mark">A</div>
+            <div>
+                <div class="logo">Car<span>Scrapy</span></div>
+                <p>Admin workspace</p>
+            </div>
+        </div>
+
+        <nav class="nav-list" aria-label="Admin navigation">
+            <button class="nav-item active" data-module="dashboard"><span>DB</span> Dashboard</button>
+            <button class="nav-item" data-module="addStaff"><span>ST</span> Add Staff</button>
+            <button class="nav-item" data-module="manageStaff"><span>MS</span> Manage Staff</button>
+            <button class="nav-item" data-module="manageYard"><span>YD</span> Manage Yard</button>
+            <button class="nav-item" data-module="appointments"><span>AP</span> Appointments</button>
+        </nav>
+
+        <div class="sidebar-note">
+            <strong>Yard operations</strong>
+            <small>Manage staff, yard status, and appointment workflow from one place.</small>
+        </div>
+    </aside>
+
+    <div id="toastContainer"></div>
+
+    <main class="main-container">
+        <header class="topbar">
+            <div>
+                <p class="eyebrow">Management dashboard</p>
+                <h1 id="pageTitle">Dashboard</h1>
+            </div>
+
+            <div class="top-actions">
+                <button id="yardToggleBtn" class="status-toggle" onclick="toggleYardStatusQuick()">
+                    Loading...
+                </button>
+
+                <div class="user-pill">
+                    <span class="avatar"></span>
+                    <span>admin</span>
+                </div>
+            </div>
+        </header>
+
+        <div class="content"></div>
+    </main>
+
+    <div id="removeStaffModal" class="modal" style="display:none;">
+        <div class="modal-content">
+            <button class="close-icon" onclick="closeRemoveStaffModal()" aria-label="Close">x</button>
+            <h3>Remove Staff</h3>
+            <input id="removeStaffId" class="input" placeholder="Staff ID" />
+            <button class="btn-danger" onclick="submitRemoveStaff()">Remove</button>
+        </div>
+    </div>
+
+    <div id="contactEditModal" class="modal">
+        <div class="modal-content">
+            <button class="close-icon" onclick="document.getElementById('contactEditModal').style.display='none'" aria-label="Close">x</button>
+            <h3>Edit Contact</h3>
+
+            <input id="contactEmail" placeholder="Email" class="input"/>
+            <input id="contactNumber" placeholder="Contact" class="input"/>
+
+            <button class="btn-success" onclick="updateContactOnly()">Update</button>
+        </div>
+    </div>
+
+    <div id="statusEditModal" class="modal">
+        <div class="modal-content">
+            <button class="close-icon" onclick="document.getElementById('statusEditModal').style.display='none'" aria-label="Close">x</button>
+            <h3>Change Status</h3>
+
+            <select id="statusSelect" class="input">
+                <option value="ACTIVE">ACTIVE</option>
+                <option value="INACTIVE">INACTIVE</option>
+                <option value="UNDERMAINTENANCE">UNDERMAINTENANCE</option>
+            </select>
+
+            <button class="btn-success" onclick="updateStatusOnly()">Update</button>
+        </div>
+    </div>
+
+    <div class="module-card">
+    <div class="module-icon">ST</div>
+    <strong>Add Staff</strong>
+    <small>Create a new staff account</small>
+</div>
+
+
+    <script src="admin-dashboard.js"></script>
+</body>
+</html>

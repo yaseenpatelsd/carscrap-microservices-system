@@ -1,0 +1,57 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: api-gateway
+
+  cloud:
+    gateway:
+      default-filters:
+        - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials
+
+
+      # 🔀 ROUTES (VERY IMPORTANT)
+      routes:
+
+        - id: auth-service
+          uri: lb://AUTH-SERVICE
+          predicates:
+            - Path=/auth/**,/admin/**,/staff/**
+                
+        - id: yard-service
+          uri: lb://yard-service
+          predicates:
+            - Path=/yard/**,/management/yard/**,/search/**
+
+
+
+        - id: booking-service
+          uri: lb://Booking-Service
+          predicates:
+            - Path=/appointment/**,/management/booking/**
+
+        - id: car-service
+          uri: lb://car-service
+          predicates:
+            - Path=/car/**,/metal/**
+
+
+
+# 🔍 Eureka (MUST use service name in Docker)
+eureka:
+  client:
+    service-url:
+      defaultZone: http://service-registry:8761/eureka
+    register-with-eureka: true
+    fetch-registry: true
+
+# 🔧 Optional (but useful for debugging)
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "gateway,health,info"
+
+
+

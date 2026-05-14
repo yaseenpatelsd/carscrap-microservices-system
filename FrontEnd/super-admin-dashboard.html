@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Super Admin Dashboard</title>
+    <link rel="stylesheet" href="super-admin-dashboard.css">
+</head>
+
+<body>
+    <aside class="sidebar">
+        <div class="brand">
+            <div class="brand-mark">S</div>
+            <div>
+                <div class="logo">Car<span>Scrapy</span></div>
+                <p>Super admin control</p>
+            </div>
+        </div>
+
+        <nav class="nav-list" aria-label="Super admin navigation">
+            <button class="nav-item active" onclick="loadModule('dashboard')"><span>DB</span> Dashboard</button>
+            <button class="nav-item" onclick="loadModule('addAdmin')"><span>AD</span> Add Admin</button>
+            <button class="nav-item" onclick="loadModule('addStaff')"><span>ST</span> Add Staff</button>
+            <button class="nav-item" onclick="loadModule('addYard')"><span>YD</span> Add Yard</button>
+            <button class="nav-item" onclick="loadModule('yards')"><span>MY</span> Scrap Yards</button>
+            <button class="nav-item" onclick="loadModule('metalPrice')"><span>MP</span> Metal Price</button>
+        </nav>
+
+        <div class="sidebar-note">
+            <strong>Platform operations</strong>
+            <small>Create admins, manage yards, assign teams, and update metal rates.</small>
+        </div>
+    </aside>
+
+    <main class="main-container super-admin">
+        <header class="topbar">
+            <div>
+                <p class="eyebrow">Platform dashboard</p>
+                <h1>Super Admin Panel</h1>
+            </div>
+
+            <div class="user-pill">
+                <span class="avatar"></span>
+                <span>Super Admin</span>
+            </div>
+        </header>
+
+        <section class="stats">
+            <article class="stat-card">
+                <span class="stat-icon">AD</span>
+                <span class="stat-label">Admins</span>
+                <strong id="statAdmins">--</strong>
+                <small>Admin accounts</small>
+            </article>
+
+            <article class="stat-card">
+                <span class="stat-icon">ST</span>
+                <span class="stat-label">Staff</span>
+                <strong id="statStaff">--</strong>
+                <small>Staff members</small>
+            </article>
+
+            <article class="stat-card">
+                <span class="stat-icon">YD</span>
+                <span class="stat-label">Yards</span>
+                <strong id="statYards">--</strong>
+                <small>Scrap yard locations</small>
+            </article>
+        </section>
+
+        <section class="dashboard-grid">
+            <button class="dashboard-card" onclick="loadModule('addAdmin')">
+                <span class="card-icon">AD</span>
+                <strong>Add Admin</strong>
+                <small>Create and manage admin users.</small>
+            </button>
+
+            <button class="dashboard-card" onclick="loadModule('addStaff')">
+                <span class="card-icon">ST</span>
+                <strong>Add Staff</strong>
+                <small>Register staff members for yard work.</small>
+            </button>
+
+            <button class="dashboard-card" onclick="loadModule('addYard')">
+                <span class="card-icon">YD</span>
+                <strong>Add Yard</strong>
+                <small>Add new scrapyard locations.</small>
+            </button>
+
+            <button class="dashboard-card" onclick="loadModule('yards')">
+                <span class="card-icon">MY</span>
+                <strong>Manage Yards</strong>
+                <small>Search, edit, assign admins and staff.</small>
+            </button>
+
+            <button class="dashboard-card" onclick="loadModule('metalPrice')">
+                <span class="card-icon">MP</span>
+                <strong>Metal Price</strong>
+                <small>Update scrap metal price values.</small>
+            </button>
+        </section>
+
+        <div class="content"></div>
+    </main>
+
+    <div id="adminModal" class="modal">
+        <div class="modal-content">
+            <button class="close" onclick="closeAdminModal()">x</button>
+            <h2>Add New Admin</h2>
+            <input type="text" id="adminUsername" placeholder="Username" class="form-control"/>
+            <input type="email" id="adminEmail" placeholder="Email" class="form-control"/>
+            <input type="password" id="adminPassword" placeholder="Password" class="form-control"/>
+            <button class="search-btn" onclick="submitAdmin()">Create Admin</button>
+            <div id="adminResult"></div>
+        </div>
+    </div>
+
+    <div id="staffModal" class="modal">
+        <div class="modal-content">
+            <button class="close" onclick="closeStaffModal()">x</button>
+            <h2>Add Staff</h2>
+            <input type="text" id="staffUsername" class="form-control" placeholder="Username"/>
+            <input type="email" id="staffEmail" class="form-control" placeholder="Email"/>
+            <input type="password" id="staffPassword" class="form-control" placeholder="Password"/>
+            <button id="staffBtn" onclick="submitStaff()">Create Staff</button>
+            <div id="staffResult"></div>
+        </div>
+    </div>
+
+    <div id="yardModal" class="modal">
+        <div class="modal-content">
+            <button class="close" onclick="closeYardModal()">x</button>
+            <h2>Add Yard</h2>
+            <input type="text" id="yardName" class="form-control" placeholder="Yard name"/>
+            <select id="yardCity" class="form-control"></select>
+            <select id="yardState" class="form-control"></select>
+            <input type="text" id="yardPincode" class="form-control" placeholder="Pincode"/>
+            <input type="text" id="yardContact" class="form-control" placeholder="Contact"/>
+            <input type="email" id="yardEmail" class="form-control" placeholder="Email"/>
+            <select id="yardStatus" class="form-control"></select>
+            <button id="yardBtn" onclick="submitYard()">Create Yard</button>
+            <div id="yardResult"></div>
+        </div>
+    </div>
+
+    <div id="yardSearchModal" class="modal">
+        <div class="modal-content modal-large">
+            <h3>Scrap Yards</h3>
+            <div class="filters">
+                <input id="searchYardName" placeholder="Search by name">
+                <input id="searchYardCity" placeholder="City">
+                <input id="searchYardState" placeholder="State">
+                <input id="searchYardPincode" placeholder="Pincode">
+            </div>
+            <button onclick="searchYards()">Search</button>
+            <div id="yardResults" class="yard-results"></div>
+        </div>
+    </div>
+
+    <div id="editYardModal" class="modal">
+        <div class="modal-content">
+            <button class="close" onclick="closeEditYardModal()">x</button>
+            <h2>Edit Yard</h2>
+            <input type="hidden" id="editYardId">
+            <input type="text" id="editYardName" placeholder="Name" class="form-control"/>
+            <input type="text" id="editYardContact" placeholder="Contact" class="form-control"/>
+            <input type="email" id="editYardEmail" placeholder="Email" class="form-control"/>
+            <select id="editYardStatus" class="form-control">
+                <option value="">Select Status</option>
+                <option value="ACTIVE">ACTIVE</option>
+                <option value="INACTIVE">INACTIVE</option>
+                <option value="UNDERMAINTENANCE">UNDERMAINTENANCE</option>
+            </select>
+            <button class="search-btn" id="editYardBtn" onclick="submitEditYard()">Update Yard</button>
+            <div id="editYardResult"></div>
+        </div>
+    </div>
+
+    <div id="assignAdminModal" class="modal">
+        <div class="modal-content">
+            <button class="close" onclick="closeAssignAdminModal()">x</button>
+            <h2>Assign Admin to Yard</h2>
+            <input type="hidden" id="assignYardId">
+            <select id="assignAdminId" class="form-control"></select>
+            <button class="search-btn" id="assignBtn" onclick="submitAssignAdmin()">Assign</button>
+            <div id="assignResult"></div>
+        </div>
+    </div>
+
+    <div id="removeAdminModal" class="modal">
+        <div class="modal-content">
+            <h2>Remove Admin</h2>
+            <input type="hidden" id="removeYardId">
+            <p>Are you sure you want to remove admin from this yard?</p>
+            <button class="btn-danger" onclick="submitRemoveAdmin()">Confirm</button>
+            <button onclick="closeRemoveAdminModal()">Cancel</button>
+        </div>
+    </div>
+
+    <div id="assignStaffModal" class="modal">
+        <div class="modal-content">
+            <h3>Assign Staff</h3>
+            <input type="hidden" id="assignStaffYardId">
+            <select id="assignStaffId"></select>
+            <button id="assignStaffBtn" onclick="submitAssignStaff()">Assign</button>
+            <div id="assignStaffResult"></div>
+        </div>
+    </div>
+
+    <div id="removeStaffModal" class="modal">
+        <div class="modal-content">
+            <h3>Remove Staff</h3>
+            <input type="hidden" id="removeStaffYardId"/>
+            <input type="number" id="removeStaffId" placeholder="Enter Staff ID" class="input"/>
+            <button class="btn-danger" onclick="submitRemoveStaff()">Remove</button>
+            <button onclick="closeRemoveStaffModal()">Cancel</button>
+        </div>
+    </div>
+
+    <div id="yardStaffModal" class="modal">
+        <div class="modal-content">
+            <h3>Yard Staff</h3>
+            <div id="yardStaffContainer"></div>
+            <button onclick="closeYardStaffModal()">Close</button>
+        </div>
+    </div>
+
+    <div id="contactEditModal" class="modal">
+        <div class="modal-content">
+            <h3>Edit Contact</h3>
+            <input type="hidden" id="contactYardId"/>
+            <input id="contactEmail" placeholder="Email" class="input"/>
+            <input id="contactNumber" placeholder="Contact" class="input"/>
+            <button onclick="updateContactOnly()">Update</button>
+        </div>
+    </div>
+
+    <div id="statusEditModal" class="modal">
+        <div class="modal-content">
+            <h3>Change Status</h3>
+            <input type="hidden" id="statusYardId"/>
+            <select id="statusSelect" class="input">
+                <option value="ACTIVE">ACTIVE</option>
+                <option value="INACTIVE">INACTIVE</option>
+                <option value="UNDERMAINTENANCE">UNDERMAINTENANCE</option>
+            </select>
+            <button onclick="updateStatusOnly()">Update</button>
+        </div>
+    </div>
+
+    <div id="toastContainer"></div>
+    <script src="super-admin-dashboard.js"></script>
+</body>
+</html>
