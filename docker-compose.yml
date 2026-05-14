@@ -50,11 +50,8 @@ services:
     depends_on:
       - service-registry
       - mysql
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/auth_db
-      SPRING_DATASOURCE_USERNAME: root
-      SPRING_DATASOURCE_PASSWORD: patel
-      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://service-registry:8761/eureka
+    env_file:
+      - ./auth-service/.env
 
   # 🔹 Email Service
   EMAIL-SERVICE:
@@ -62,8 +59,8 @@ services:
     image: carscrapproject-email-service
     depends_on:
       - service-registry
-    environment:
-      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://service-registry:8761/eureka
+    env_file:
+      - ./Email_Service/.env
 
   # 🔹 Car Service
   CAR-SERVICE:
@@ -72,11 +69,8 @@ services:
     depends_on:
       - service-registry
       - mysql
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/car_db
-      SPRING_DATASOURCE_USERNAME: root
-      SPRING_DATASOURCE_PASSWORD: patel
-      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://service-registry:8761/eureka
+    env_file:
+       - ./car-service/.env
 
   # 🔹 Booking Service
   BOOKING-SERVICE:
@@ -85,11 +79,8 @@ services:
     depends_on:
       - service-registry
       - mysql
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/booking_db
-      SPRING_DATASOURCE_USERNAME: root
-      SPRING_DATASOURCE_PASSWORD: patel
-      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://service-registry:8761/eureka
+    env_file:
+      - ./booking-service/.env
 
   # 🔹 Yard Service
   YARD-SERVICE:
@@ -98,11 +89,8 @@ services:
     depends_on:
       - service-registry
       - mysql
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/yard_db
-      SPRING_DATASOURCE_USERNAME: root
-      SPRING_DATASOURCE_PASSWORD: patel
-      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://service-registry:8761/eureka
+    env_file:
+      - ./yard-service/.env
 
 
  
