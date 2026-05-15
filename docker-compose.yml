@@ -55,7 +55,7 @@ services:
       - service-registry
       - mysql
     env_file:
-      - ./auth-service/.env
+      - ./AUTH-SERVICE/.env
     restart: unless-stopped  
 
   # 🔹 Email Service
@@ -81,13 +81,13 @@ services:
 
   # 🔹 Booking Service
   BOOKING-SERVICE:
-    build: ./booking-service
+    build: ./Booking-Service
     image: carscrapproject-booking-service
     depends_on:
       - service-registry
       - mysql
     env_file:
-      - ./booking-service/.env
+      - ./Booking-Service/.env
     restart: unless-stopped  
 
   # 🔹 Yard Service
