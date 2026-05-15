@@ -6,8 +6,13 @@ services:
     build: ./service-registry
     image: carscrapproject-service-registry
     ports:
-    - "8761:8761"
+      - "8761:8761"
     restart: unless-stopped
+    healthcheck:
+       test: [ "CMD", "curl", "-f", "http://localhost:8761" ]
+       interval: 15s
+       timeout: 10s
+       retries: 10  
 
 
   nginx:
@@ -19,20 +24,21 @@ services:
       - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
     depends_on:
       - api-gateway
-    restart: unless-stopped  
+    restart: unless-stopped
+    
 
 
   # 🔹 API Gateway (ENTRY POINT)
   api-gateway:
-    build: ./gateway
+    build: ./Gateway
     image: carscrapproject-gateway
     expose:
-    - "8080"
+      - "8080"
     depends_on:
       - service-registry
     environment:
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://service-registry:8761/eureka
-    restart: unless-stopped  
+    restart: unless-stopped
 
   # 🔹 MySQL Database
   mysql:
@@ -41,68 +47,79 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: patel
     ports:
-      - "3307:3306" 
+      - "3307:3306"
     volumes:
       - mysql_data:/var/lib/mysql
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
-    restart: unless-stopped  
+    restart: unless-stopped
 
   # 🔹 Auth Service
   AUTH-SERVICE:
-    build: ./AUTH-SERVICE
+    build: ./auth-service
     image: carscrapproject-auth-service
     depends_on:
-      - service-registry
-      - mysql
+    service-registry:
+     condition: service_healthy
+    mysql:
+     condition: service_started
     env_file:
-      - ./AUTH-SERVICE/.env
-    restart: unless-stopped  
+      - ./auth-service/.env
+    restart: unless-stopped
 
   # 🔹 Email Service
   EMAIL-SERVICE:
     build: ./Email_Service
     image: carscrapproject-email-service
     depends_on:
-      - service-registry
+     service-registry:
+      condition: service_healthy
+     mysql:
+      condition: service_started
     env_file:
       - ./Email_Service/.env
-    restart: unless-stopped  
+    restart: unless-stopped
 
   # 🔹 Car Service
   CAR-SERVICE:
     build: ./car-service
     image: carscrapproject-car-service
     depends_on:
-      - service-registry
-      - mysql
+     service-registry:
+      condition: service_healthy
+     mysql:
+      condition: service_started
     env_file:
-       - ./car-service/.env
-    restart: unless-stopped   
+      - ./car-service/.env
+    restart: unless-stopped
 
   # 🔹 Booking Service
   BOOKING-SERVICE:
     build: ./Booking-Service
     image: carscrapproject-booking-service
     depends_on:
-      - service-registry
-      - mysql
+     service-registry:
+      condition: service_healthy
+     mysql:
+      condition: service_started
     env_file:
       - ./Booking-Service/.env
-    restart: unless-stopped  
+    restart: unless-stopped
 
   # 🔹 Yard Service
   YARD-SERVICE:
     build: ./yard-service
     image: carscrapproject-yard-service
     depends_on:
-      - service-registry
-      - mysql
+     service-registry:
+      condition: service_healthy
+     mysql:
+       condition: service_started
     env_file:
       - ./yard-service/.env
-    restart: unless-stopped  
+    restart: unless-stopped
 
 
- 
+
 
 
 volumes:
