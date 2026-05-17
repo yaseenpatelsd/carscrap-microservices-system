@@ -1,4 +1,3 @@
-
 services:
 
   # 🔹 Eureka Service Registry
@@ -8,13 +7,8 @@ services:
     ports:
       - "8761:8761"
     restart: unless-stopped
-    healthcheck:
-       test: [ "CMD", "curl", "-f", "http://localhost:8761" ]
-       interval: 15s
-       timeout: 10s
-       retries: 10  
 
-
+  # 🔹 NGINX Frontend
   nginx:
     image: nginx:latest
     ports:
@@ -25,10 +19,8 @@ services:
     depends_on:
       - api-gateway
     restart: unless-stopped
-    
 
-
-  # 🔹 API Gateway (ENTRY POINT)
+  # 🔹 API Gateway
   api-gateway:
     build: ./Gateway
     image: carscrapproject-gateway
@@ -45,7 +37,7 @@ services:
     image: mysql:8
     container_name: mysql-db
     environment:
-      MYSQL_ROOT_PASSWORD: patel
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
     ports:
       - "3307:3306"
     volumes:
@@ -58,10 +50,8 @@ services:
     build: ./auth-service
     image: carscrapproject-auth-service
     depends_on:
-    service-registry:
-     condition: service_healthy
-    mysql:
-     condition: service_started
+      - service-registry
+      - mysql
     env_file:
       - ./auth-service/.env
     restart: unless-stopped
@@ -71,10 +61,8 @@ services:
     build: ./Email_Service
     image: carscrapproject-email-service
     depends_on:
-     service-registry:
-      condition: service_healthy
-     mysql:
-      condition: service_started
+      - service-registry
+      - mysql
     env_file:
       - ./Email_Service/.env
     restart: unless-stopped
@@ -84,10 +72,8 @@ services:
     build: ./car-service
     image: carscrapproject-car-service
     depends_on:
-     service-registry:
-      condition: service_healthy
-     mysql:
-      condition: service_started
+      - service-registry
+      - mysql
     env_file:
       - ./car-service/.env
     restart: unless-stopped
@@ -97,10 +83,8 @@ services:
     build: ./Booking-Service
     image: carscrapproject-booking-service
     depends_on:
-     service-registry:
-      condition: service_healthy
-     mysql:
-      condition: service_started
+      - service-registry
+      - mysql
     env_file:
       - ./Booking-Service/.env
     restart: unless-stopped
@@ -110,17 +94,11 @@ services:
     build: ./yard-service
     image: carscrapproject-yard-service
     depends_on:
-     service-registry:
-      condition: service_healthy
-     mysql:
-       condition: service_started
+      - service-registry
+      - mysql
     env_file:
       - ./yard-service/.env
     restart: unless-stopped
-
-
-
-
 
 volumes:
   mysql_data:
