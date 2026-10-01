@@ -1,0 +1,117 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: light;
+    --ring-brand: 34 162 113;
+  }
+
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    @apply bg-ink-50 text-ink-900 font-sans antialiased;
+    background-image:
+      radial-gradient(60rem 60rem at 110% -10%, rgb(34 162 113 / 0.07), transparent 60%),
+      radial-gradient(50rem 50rem at -10% 110%, rgb(21 130 91 / 0.06), transparent 60%);
+    background-attachment: fixed;
+  }
+
+  ::selection {
+    @apply bg-brand-200 text-brand-900;
+  }
+
+  /* Consistent focus ring for keyboard users across the app. */
+  :focus-visible {
+    @apply outline-none ring-2 ring-brand-500 ring-offset-2 ring-offset-white;
+  }
+
+  /* Slimmer, softer scrollbars that fit the palette. */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: rgb(176 185 202 / 0.7) transparent;
+  }
+  *::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  *::-webkit-scrollbar-thumb {
+    @apply rounded-full border-4 border-solid border-transparent bg-ink-300 bg-clip-content;
+  }
+}
+
+@layer components {
+  .field {
+    @apply w-full rounded-xl border border-ink-200 bg-white px-4 py-3 text-sm text-ink-900
+           shadow-xs placeholder:text-ink-400 transition
+           hover:border-ink-300 hover:shadow-sm
+           focus:border-brand-500 focus:bg-white focus:shadow-sm focus:ring-4 focus:ring-brand-500/10 focus:outline-none
+           disabled:cursor-not-allowed disabled:bg-ink-100 disabled:text-ink-400 disabled:shadow-none;
+  }
+
+  .field-error {
+    @apply border-red-400 hover:border-red-400 focus:border-red-500 focus:ring-red-500/10;
+  }
+
+  .label {
+    @apply mb-1.5 block text-sm font-medium text-ink-800;
+  }
+
+  .btn {
+    @apply relative inline-flex select-none items-center justify-center gap-2 rounded-xl px-4 py-3
+           text-sm font-semibold transition-[background-color,box-shadow,transform,border-color] duration-200
+           focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2
+           disabled:cursor-not-allowed disabled:opacity-60;
+  }
+
+  .btn-primary {
+    @apply btn bg-brand-gradient bg-[length:150%_150%] bg-left text-white shadow-brand
+           hover:bg-right hover:shadow-brand-lg hover:-translate-y-px active:translate-y-0 active:shadow-brand;
+  }
+
+  .btn-ghost {
+    @apply btn border border-ink-200 bg-white text-ink-700 shadow-xs
+           hover:border-ink-300 hover:bg-ink-50 hover:text-ink-900 hover:shadow-sm active:bg-ink-100;
+  }
+
+  .card {
+    @apply rounded-2xl border border-ink-200/70 bg-white shadow-card;
+  }
+
+  .card-hover {
+    @apply transition duration-300 hover:-translate-y-1 hover:border-brand-200 hover:shadow-card-hover;
+  }
+
+  /* Small uppercase eyebrow used above headings. */
+  .eyebrow {
+    @apply text-xs font-semibold uppercase tracking-[0.14em] text-brand-600;
+  }
+
+  /* Soft pill badge. */
+  .pill {
+    @apply inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-medium;
+  }
+
+  /* Tiny icon tile used in nav + feature lists. */
+  .icon-tile {
+    @apply grid place-items-center rounded-xl bg-brand-50 text-brand-600 ring-1 ring-inset ring-brand-100;
+  }
+}
+
+/* Glassy top bar for the app shell. */
+.glass {
+  background: rgb(255 255 255 / 0.72);
+  backdrop-filter: saturate(180%) blur(12px);
+}
+
+/* Sonner toast tuning so it matches the design system. */
+.toaster [data-sonner-toast] {
+  border-radius: 0.875rem;
+  font-family: inherit;
+  box-shadow: 0 12px 34px -14px rgb(15 18 24 / 0.35);
+}
