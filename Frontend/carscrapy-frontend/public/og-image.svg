@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="CarScrapy — vehicle scrap valuation and yard booking platform">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0f1218" />
+      <stop offset="0.55" stop-color="#101a18" />
+      <stop offset="1" stop-color="#0b2320" />
+    </linearGradient>
+    <linearGradient id="brand" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#22a271" />
+      <stop offset="0.55" stop-color="#15825b" />
+      <stop offset="1" stop-color="#11684a" />
+    </linearGradient>
+    <radialGradient id="glow" cx="0.85" cy="0.1" r="0.7">
+      <stop offset="0" stop-color="#22a271" stop-opacity="0.45" />
+      <stop offset="1" stop-color="#22a271" stop-opacity="0" />
+    </radialGradient>
+    <pattern id="grid" width="44" height="44" patternUnits="userSpaceOnUse">
+      <path d="M44 0H0V44" fill="none" stroke="#ffffff" stroke-opacity="0.06" stroke-width="1" />
+    </pattern>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg)" />
+  <rect width="1200" height="630" fill="url(#grid)" />
+  <rect width="1200" height="630" fill="url(#glow)" />
+
+  <!-- Logo mark -->
+  <g transform="translate(90, 84)">
+    <rect width="72" height="72" rx="20" fill="url(#brand)" />
+    <g transform="translate(18, 18)" fill="none" stroke="#ffffff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M4 14h16M6 14V10l2-4h8l2 4v4" />
+      <circle cx="8.5" cy="16.5" r="1.6" />
+      <circle cx="15.5" cy="16.5" r="1.6" />
+    </g>
+  </g>
+
+  <text x="184" y="132" font-family="Inter, Segoe UI, system-ui, sans-serif" font-size="40" font-weight="800" fill="#ffffff">
+    Car<tspan fill="#46bd8b">Scrapy</tspan>
+  </text>
+
+  <!-- Headline -->
+  <text x="90" y="300" font-family="Inter, Segoe UI, system-ui, sans-serif" font-size="64" font-weight="800" fill="#ffffff">
+    Turn your old car
+  </text>
+  <text x="90" y="376" font-family="Inter, Segoe UI, system-ui, sans-serif" font-size="64" font-weight="800" fill="#46bd8b">
+    into value.
+  </text>
+
+  <text x="90" y="440" font-family="Inter, Segoe UI, system-ui, sans-serif" font-size="26" font-weight="500" fill="#b0b9ca">
+    Instant scrap valuation · Certified yards · Appointment booking
+  </text>
+
+  <!-- Tech chips -->
+  <g font-family="Inter, Segoe UI, system-ui, sans-serif" font-size="20" font-weight="600">
+    <rect x="90" y="500" width="150" height="46" rx="23" fill="#ffffff" fill-opacity="0.06" stroke="#ffffff" stroke-opacity="0.12" />
+    <text x="165" y="530" fill="#d6f5e3" text-anchor="middle">Spring Boot</text>
+
+    <rect x="256" y="500" width="120" height="46" rx="23" fill="#ffffff" fill-opacity="0.06" stroke="#ffffff" stroke-opacity="0.12" />
+    <text x="316" y="530" fill="#d6f5e3" text-anchor="middle">Java 21</text>
+
+    <rect x="392" y="500" width="130" height="46" rx="23" fill="#ffffff" fill-opacity="0.06" stroke="#ffffff" stroke-opacity="0.12" />
+    <text x="457" y="530" fill="#d6f5e3" text-anchor="middle">Docker</text>
+
+    <rect x="538" y="500" width="110" height="46" rx="23" fill="#ffffff" fill-opacity="0.06" stroke="#ffffff" stroke-opacity="0.12" />
+    <text x="593" y="530" fill="#d6f5e3" text-anchor="middle">AWS</text>
+  </g>
+
+  <!-- Author block -->
+  <text x="1110" y="560" text-anchor="end" font-family="Inter, Segoe UI, system-ui, sans-serif" font-size="24" font-weight="700" fill="#ffffff">
+    Built by Yaseen Patel
+  </text>
+  <text x="1110" y="592" text-anchor="end" font-family="Inter, Segoe UI, system-ui, sans-serif" font-size="20" font-weight="500" fill="#8593ac">
+    Java Backend Developer · carscrapy.online
+  </text>
+</svg>
