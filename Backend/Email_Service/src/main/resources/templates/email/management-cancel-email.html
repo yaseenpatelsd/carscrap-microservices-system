@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body style="margin:0;padding:0;background:#f3f7f4;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;">
+
+<table width="100%" cellpadding="0" cellspacing="0" style="padding:32px 12px;">
+    <tr>
+        <td align="center">
+
+            <table width="100%" style="max-width:600px;background:#ffffff;border-radius:16px;overflow:hidden;border:1px solid #e2e8e6;">
+
+                <!-- HEADER -->
+                <tr>
+                    <td style="background:#7f1d1d;padding:28px 24px;text-align:center;color:white;">
+                        <h1 style="margin:0;font-size:22px;font-weight:600;">CarScrapy</h1>
+                        <p style="margin-top:6px;font-size:13px;opacity:0.85;">
+                            Appointment Update
+                        </p>
+                    </td>
+                </tr>
+
+                <!-- ALERT STRIP -->
+                <tr>
+                    <td style="background:#fef2f2;color:#7f1d1d;text-align:center;padding:10px;font-size:13px;font-weight:600;">
+                        Appointment Cancelled
+                    </td>
+                </tr>
+
+                <!-- TITLE -->
+                <tr>
+                    <td style="padding:26px 24px 10px;text-align:center;">
+                        <h2 style="margin:0;font-size:20px;color:#111827;font-weight:600;">
+                            Your Appointment Could Not Be Completed
+                        </h2>
+                        <p style="margin-top:8px;font-size:14px;color:#6b7280;">
+                            We regret to inform you that your scheduled booking has been cancelled.
+                        </p>
+                    </td>
+                </tr>
+
+                <!-- BODY -->
+                <tr>
+                    <td style="padding:10px 24px 26px;">
+
+                        <!-- USER -->
+                        <p style="font-size:14px;color:#374151;">
+                            Hi <strong th:text="${username}">User</strong>,
+                        </p>
+
+                        <p style="font-size:14px;color:#374151;">
+                            We’re writing to let you know that your appointment with <strong>CarScrapy</strong> has been cancelled by our management team.
+                        </p>
+
+                        <p style="font-size:14px;color:#374151;">
+                            This decision may have been made due to verification concerns or operational limitations at the scheduled time. We understand this may cause inconvenience and sincerely apologize for the disruption.
+                        </p>
+
+                        <!-- BOOKING ID CARD -->
+                        <div style="margin:26px 0;text-align:center;">
+                            <div style="
+                                display:inline-block;
+                                padding:12px 28px;
+                                border-radius:10px;
+                                background:#fef2f2;
+                                border:1px solid #fecaca;
+                                font-size:15px;
+                                font-weight:600;
+                                color:#7f1d1d;
+                            ">
+                                Booking Reference: #<span th:text="${appointmentId}">12345</span>
+                            </div>
+                        </div>
+
+                        <!-- DETAILS CARD -->
+                        <div style="background:#fafafa;padding:20px;border-radius:12px;border:1px solid #e5e7eb;">
+
+                            <p style="margin:0 0 12px 0;font-size:14px;color:#111827;font-weight:600;">
+                                Appointment Details
+                            </p>
+
+                            <p style="margin:6px 0;font-size:13px;color:#374151;">
+                                <strong>Vehicle:</strong> <span th:text="${carName}">Car Name</span>
+                            </p>
+
+                            <p style="margin:6px 0;font-size:13px;color:#374151;">
+                                <strong>Registration Year:</strong> <span th:text="${registrationYear}">2020</span>
+                            </p>
+
+                            <p style="margin:6px 0;font-size:13px;color:#374151;">
+                                <strong>Expiry Year:</strong> <span th:text="${dateOfExpire}">2002</span>
+                            </p>
+
+                            <p style="margin:6px 0;font-size:13px;color:#374151;">
+                                <strong>Vehicle Type:</strong> <span th:text="${vehicleType}">SUV</span>
+                            </p>
+
+                            <p style="margin:6px 0;font-size:13px;color:#374151;">
+                                <strong>Fuel Type:</strong> <span th:text="${fuelType}">Petrol</span>
+                            </p>
+
+                            <hr style="border:none;border-top:1px solid #e5e7eb;margin:14px 0;">
+
+                            <p style="margin:6px 0;font-size:13px;color:#374151;">
+                                <strong>Status:</strong>
+                                <span style="color:#b91c1c;font-weight:600;" th:text="${status}">
+                                    CANCELLED
+                                </span>
+                            </p>
+
+                            <p style="margin-top:10px;font-size:14px;color:#374151;">
+                                Estimated Value: ₹<span th:text="${estimatePrice}">50000</span>
+                            </p>
+
+                        </div>
+
+                        <!-- REASON -->
+                        <div style="margin-top:20px;background:#f9fafb;padding:16px;border-radius:10px;border:1px solid #e5e7eb;">
+                            <p style="margin:0;font-size:13px;color:#374151;font-weight:600;">
+                                Reason for Cancellation
+                            </p>
+
+                            <p style="margin-top:6px;font-size:13px;color:#4b5563;"
+                               th:text="${reason}">
+                                Reason provided
+                            </p>
+                        </div>
+
+                        <!-- NEXT STEPS -->
+                        <div style="margin-top:22px;background:#f9fafb;padding:16px;border-radius:10px;border:1px solid #e5e7eb;">
+                            <p style="margin:0;font-size:13px;color:#374151;font-weight:600;">
+                                What You Can Do Next
+                            </p>
+
+                            <ul style="margin:8px 0 0 18px;font-size:13px;color:#4b5563;">
+                                <li>You may schedule a new appointment at a suitable time</li>
+                                <li>Please review and confirm your vehicle details before rebooking</li>
+                                <li>Reach out to our support team if you need any assistance</li>
+                            </ul>
+                        </div>
+
+                    </td>
+                </tr>
+
+                <!-- FOOTER -->
+                <tr>
+                    <td style="padding:18px 24px;text-align:center;background:#f1f5f3;color:#9ca3af;font-size:11px;border-top:1px solid #e2e8e6;">
+                        © 2026 CarScrapy • All rights reserved <br>
+                        support@carscrapy.com <br>
+                        This is an automated message. Please do not reply.
+                    </td>
+                </tr>
+
+            </table>
+
+        </td>
+    </tr>
+</table>
+
+</body>
+</html>

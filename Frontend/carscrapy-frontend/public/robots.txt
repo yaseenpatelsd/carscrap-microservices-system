@@ -1,0 +1,36 @@
+# CarScrapy — https://carscrapy.online
+# Allow crawlers on public pages; keep authenticated portals out of the index.
+
+User-agent: *
+Allow: /
+Allow: /about
+Allow: /architecture
+Allow: /login
+Allow: /register
+
+# Authenticated app areas have no public value and add crawl noise.
+Disallow: /dashboard
+Disallow: /dashboard/
+Disallow: /admin
+Disallow: /admin/
+Disallow: /staff
+Disallow: /staff/
+Disallow: /super-admin
+Disallow: /super-admin/
+Disallow: /verify
+Disallow: /reset-password
+Disallow: /forgot-password
+Disallow: /home
+
+# Never index API traffic.
+Disallow: /api/
+
+# Be explicit for the major search crawlers.
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+Sitemap: https://carscrapy.online/sitemap.xml
+Host: https://carscrapy.online
