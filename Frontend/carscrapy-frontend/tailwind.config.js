@@ -49,8 +49,11 @@ export default {
       },
       keyframes: {
         'fade-up': {
+          // No transform on the final keyframe: with fill-mode `both` a lingering
+          // transform would turn any animated ancestor into the containing block
+          // for `position: fixed` descendants (breaking modals/overlays).
           '0%': { opacity: '0', transform: 'translateY(12px)' },
-          '100%': { opacity: '1', transform: 'translateY(0)' },
+          '100%': { opacity: '1' },
         },
         'fade-in': {
           '0%': { opacity: '0' },

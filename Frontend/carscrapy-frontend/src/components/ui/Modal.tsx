@@ -1,7 +1,8 @@
 import { cn } from '@/lib/cn'
 import { X } from 'lucide-react'
 import type { ReactNode } from 'react'
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import { createPortal } from 'react-dom'
 
 interface ModalProps {
   open: boolean
@@ -17,7 +18,15 @@ interface ModalProps {
 /** Stack of currently-open modals, so Escape only closes the top one. */
 const modalStack: symbol[] = []
 
-/** Accessible, portal-free modal used across every dashboard. */
+/**
+ * Accessible modal.
+ *
+ * Rendered through a portal to `document.body` so it can never be trapped by
+ * an ancestor that has a `transform` / `filter` / `backdrop-filter` (the page
+ * wrappers use `animate-fade-up`, which sets a transform and would otherwise
+ * become the containing block for `position: fixed`, pushing the dialog
+ * off-centre or entirely off-screen on mobile).
+ */
 export function Modal({
   open,
   onClose,
@@ -27,6 +36,10 @@ export function Modal({
   footer,
   size = 'md',
 }: ModalProps) {
+  // Resolve the portal target only in the browser.
+  const [mounted, setMounted] = useState(false)
+  useEffect(() => setMounted(true), [])
+
   const idRef = useRef<symbol>()
   if (!idRef.current) idRef.current = Symbol('modal')
 
@@ -57,12 +70,18 @@ export function Modal({
     }
   }, [open, onClose])
 
-  if (!open) return null
+  if (!open || !mounted) return null
 
-  return (
-    <div className="fixed inset-0 z-50 flex items-end justify-center p-0 sm:items-center sm:p-6">
+  return createPortal(
+    <div
+      className={cn(
+        // Center on every screen; on mobile first the dialog may fill the width.
+        'fixed inset-0 z-[100] flex justify-center overflow-y-auto',
+        'items-center p-4 sm:p-6',
+      )}
+    >
       <div
-        className="absolute inset-0 bg-ink-950/50 backdrop-blur-sm animate-fade-in"
+        className="fixed inset-0 bg-ink-950/50 backdrop-blur-sm animate-fade-in"
         onClick={onClose}
         aria-hidden
       />
@@ -71,7 +90,8 @@ export function Modal({
         aria-modal="true"
         aria-label={title}
         className={cn(
-          'relative flex max-h-[92vh] w-full flex-col overflow-hidden rounded-t-3xl bg-white shadow-2xl animate-fade-up motion-reduce:animate-none sm:rounded-2xl',
+          'relative my-auto flex max-h-[calc(100dvh-2rem)] w-full flex-col overflow-hidden',
+          'rounded-2xl bg-white shadow-2xl animate-fade-up motion-reduce:animate-none',
           size === 'lg' ? 'sm:max-w-3xl' : 'sm:max-w-lg',
         )}
       >
@@ -97,6 +117,7 @@ export function Modal({
           </footer>
         )}
       </div>
-    </div>
+    </div>,
+    document.body,
   )
 }

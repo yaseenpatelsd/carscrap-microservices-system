@@ -5,6 +5,7 @@ import { Logo } from '@/features/auth/AuthLayout'
 import type { LucideIcon } from 'lucide-react'
 import { LogOut, Menu, X } from 'lucide-react'
 import { useEffect, useState } from 'react'
+import { createPortal } from 'react-dom'
 import { NavLink, Outlet, useLocation } from 'react-router-dom'
 import type { ReactNode } from 'react'
 
@@ -148,25 +149,29 @@ export function AppShell({ nav, portalName, headerExtra, accent = 'brand' }: App
         <SidebarContent {...sidebarProps} />
       </aside>
 
-      {menuOpen && (
-        <div className="fixed inset-0 z-40 lg:hidden">
-          <div
-            className="absolute inset-0 bg-ink-950/50 backdrop-blur-sm animate-fade-in"
-            onClick={() => setMenuOpen(false)}
-            aria-hidden
-          />
-          <aside className="absolute inset-y-0 left-0 flex w-72 max-w-[85%] flex-col bg-white shadow-2xl animate-fade-up [animation-duration:0.28s] motion-reduce:animate-none">
-            <button
+      {menuOpen &&
+        createPortal(
+          <>
+          <div className="fixed inset-0 z-[100] lg:hidden">
+            <div
+              className="absolute inset-0 bg-ink-950/50 backdrop-blur-sm animate-fade-in"
               onClick={() => setMenuOpen(false)}
-              aria-label="Close menu"
-              className="absolute right-3 top-4 grid h-8 w-8 place-items-center rounded-lg text-ink-500 hover:bg-ink-100"
-            >
-              <X className="h-4 w-4" />
-            </button>
-            <SidebarContent {...sidebarProps} onNavigate={() => setMenuOpen(false)} />
-          </aside>
-        </div>
-      )}
+              aria-hidden
+            />
+            <aside className="absolute inset-y-0 left-0 flex w-72 max-w-[85%] flex-col bg-white shadow-2xl animate-fade-up [animation-duration:0.28s] motion-reduce:animate-none">
+              <button
+                onClick={() => setMenuOpen(false)}
+                aria-label="Close menu"
+                className="absolute right-3 top-4 grid h-8 w-8 place-items-center rounded-lg text-ink-500 hover:bg-ink-100"
+              >
+                <X className="h-4 w-4" />
+              </button>
+              <SidebarContent {...sidebarProps} onNavigate={() => setMenuOpen(false)} />
+            </aside>
+          </div>
+          </>,
+          document.body,
+        )}
 
       <div className="flex min-w-0 flex-1 flex-col">
         <header className="glass sticky top-0 z-30 flex h-16 items-center gap-3 border-b border-ink-200/70 px-4 lg:px-8">
